@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workplace Harassment Training — In Progress | Celeste Markey</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-dark:   #1f6f94;
+    --teal:        #286d94;
+    --teal-mid:    #3585ad;
+    --teal-light:  #e8f4f9;
+    --teal-pale:   #f2f9fc;
+    --text:        #2c2c2c;
+    --muted:       #6b7a85;
+    --border:      #d8e8ef;
+    --white:       #ffffff;
+    --bg:          #ffffff;
+    --rule:        #dde8ed;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--teal-dark);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+
+  /* HERO */
+  .hero {
+    padding: 3.5rem 2.5rem 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--teal-light);
+    border: 1px solid var(--border);
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  .badge-dot {
+    width: 7px; height: 7px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    color: var(--teal-dark);
+    line-height: 1.2;
+    margin-bottom: 0.9rem;
+    font-weight: 700;
+  }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 620px;
+    margin-bottom: 1.75rem;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.83rem;
+    color: var(--muted);
+  }
+  .meta-item { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-item strong { color: var(--teal); }
+
+  /* PROGRESS */
+  .progress-section {
+    background: var(--teal-pale);
+    border-bottom: 1px solid var(--border);
+    padding: 1.6rem 2.5rem;
+  }
+  .progress-inner { max-width: 900px; margin: 0 auto; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.65rem;
+  }
+  .progress-label span:last-child { color: var(--teal); }
+  .progress-track {
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 30%;
+    background: var(--teal);
+    border-radius: 3px;
+  }
+  .phase-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .phase {
+    font-size: 0.71rem;
+    padding: 0.22rem 0.65rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .phase.done     { background: var(--teal-light); color: var(--teal-dark); border: 1px solid var(--border); }
+  .phase.active   { background: var(--teal); color: #fff; border: 1px solid var(--teal); }
+  .phase.upcoming { background: #fff; color: var(--muted); border: 1px solid var(--border); }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 5rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.9rem;
+  }
+
+  /* OVERVIEW GRID */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .overview-card {
+    background: var(--teal-pale);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+  }
+  .overview-card h3 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.45rem;
+  }
+  .overview-card p {
+    color: var(--text);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* STORYBOARD */
+  .storyboard-title {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    color: var(--teal-dark);
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+  .storyboard-sub {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .scene-strip { display: flex; flex-direction: column; gap: 1rem; }
+
+  .scene-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+  }
+  .scene-card:hover {
+    border-color: var(--teal-mid);
+    box-shadow: 0 3px 16px rgba(40,109,148,0.1);
+  }
+
+  .scene-visual {
+    background: var(--teal-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.4rem 1rem;
+    gap: 0.6rem;
+    position: relative;
+    min-height: 150px;
+    border-right: 1px solid var(--border);
+  }
+  .scene-number {
+    position: absolute;
+    top: 0.6rem; left: 0.7rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    text-transform: uppercase;
+  }
+  .scene-icon { font-size: 2.25rem; }
+  .scene-setting {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .scene-status {
+    position: absolute;
+    bottom: 0.55rem; right: 0.6rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.18rem 0.45rem;
+    border-radius: 2rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .status-scripted     { background: rgba(40,109,148,0.12); color: var(--teal-dark); }
+  .status-storyboarded { background: #e6f4ea; color: #2e7d46; }
+  .status-queued       { background: #f0f0f0; color: var(--muted); }
+
+  .scene-content { padding: 1.3rem 1.5rem; }
+  .scene-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .scene-title { font-size: 0.975rem; font-weight: 700; color: var(--teal-dark); }
+  .scene-type {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--teal-mid);
+    border: 1px solid var(--border);
+    padding: 0.13rem 0.5rem;
+    border-radius: 2rem;
+  }
+  .scene-desc { color: var(--muted); font-size: 0.865rem; margin-bottom: 0.8rem; line-height: 1.55; }
+  .scene-notes { display: flex; flex-direction: column; gap: 0.3rem; }
+  .note { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.78rem; color: var(--text); }
+  .note-icon { flex-shrink: 0; font-size: 0.72rem; margin-top: 0.1rem; }
+
+  /* BRANCH DIAGRAM */
+  .branch-section { margin-top: 3rem; }
+  .branch-diagram {
+    background: var(--teal-pale);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-top: 1.25rem;
+  }
+  .branch-row { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .branch-node {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    font-size: 0.78rem;
+    max-width: 160px;
+  }
+  .branch-node.decision { border-color: var(--teal); background: var(--teal-light); }
+  .branch-node .node-title { font-weight: 700; color: var(--teal-dark); margin-bottom: 0.2rem; }
+  .branch-node .node-sub { color: var(--muted); font-size: 0.7rem; }
+  .branch-connector { display: flex; justify-content: center; padding: 0.45rem 0; color: var(--muted); }
+  .branch-labels {
+    display: flex; justify-content: center; gap: 4rem;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 0.4rem; color: var(--muted);
+  }
+  .label-good { color: #2e7d46; }
+  .label-bad  { color: #c0392b; }
+
+  /* SKILLS */
+  .skills-section { margin-top: 3rem; }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .skill-tag {
+    background: var(--teal-light);
+    border: 1px solid var(--border);
+    color: var(--teal-dark);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.75rem 2.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* RESPONSIVE */
+  @media (max-width: 680px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero, main, .progress-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .scene-card { grid-template-columns: 1fr; }
+    .scene-visual { min-height: 90px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Celeste Markey</div>
+
+</nav>
+
+<div class="hero">
+  <div class="badge"><span class="badge-dot"></span> In Progress</div>
+  <h1>Workplace Harassment &amp;<br>Code of Conduct Training</h1>
+  <p class="hero-sub">A scenario-based compliance module built in Vyond, targeting corporate employees. Uses branching decisions and real-world dialogue to drive behavior change — not just policy recall.</p>
+  <div class="meta-row">
+    <div class="meta-item">🎬 <strong>Tool:</strong> Vyond</div>
+    <div class="meta-item">⏱ <strong>Seat time:</strong> ~12 minutes</div>
+    <div class="meta-item">👥 <strong>Audience:</strong> All employees</div>
+    <div class="meta-item">📐 <strong>Format:</strong> Scenario-based + branching</div>
+  </div>
+</div>
+
+<div class="progress-section">
+  <div class="progress-inner">
+    <div class="progress-label">
+      <span>Production Progress</span>
+      <span>30% complete</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+    <div class="phase-row">
+      <span class="phase done">✓ Topic Research</span>
+      <span class="phase done">✓ Learning Objectives</span>
+      <span class="phase done">✓ Storyboard</span>
+      <span class="phase active">→ Scripting</span>
+      <span class="phase upcoming">Vyond Animation</span>
+      <span class="phase upcoming">Review &amp; Revise</span>
+      <span class="phase upcoming">Final Export</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <div class="section-label">Project Overview</div>
+  <div class="overview-grid">
+    <div class="overview-card">
+      <h3>Learning Objectives</h3>
+      <p>Learners will recognize harassment behaviors, respond appropriately in the moment, and know how to report incidents using company policy.</p>
+    </div>
+    <div class="overview-card">
+      <h3>Design Approach</h3>
+      <p>Branching scenario with a recurring cast of characters. Wrong choices show realistic consequences before looping back — not just a "try again" screen.</p>
+    </div>
+    <div class="overview-card">
+      <h3>Characters</h3>
+      <p><strong>Kezia</strong> — new employee (learner proxy)<br><strong>Blaine</strong> — manager (antagonist)<br><strong>Tomás</strong> — coworker &amp; bystander<br><strong>Bettina</strong> — resolution guide</p>
+    </div>
+    <div class="overview-card">
+      <h3>Vyond Techniques</h3>
+      <p>Character lip-sync, office environment, whiteboard prop, phone call scene, emotional expression changes, and smooth scene transitions.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Scene-by-Scene Storyboard</div>
+  <div class="storyboard-title">Full Module Storyboard</div>
+  <p class="storyboard-sub">6 scenes · branching decision at Scene 3 · two consequence paths · resolution</p>
+
+  <div class="scene-strip">
+
+    <div class="scene-card">
+      <div class="scene-visual">
+        <span class="scene-number">Scene 01</span>
+        <span class="scene-icon">🏢</span>
+        <span class="scene-setting">Office lobby · Day 1</span>
+        <span class="scene-status status-scripted">Scripted</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">Meet Kezia</span>
+          <span class="scene-type">Introduction</span>
+        </div>
+        <p class="scene-desc">Kezia arrives for her first week at a mid-size marketing firm. Narrator VO introduces her and establishes the stakes: "Every workplace has a culture. Sometimes that culture needs a defender."</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Character walks in, receptionist greets her. Pan to open-plan office. Upbeat but neutral music.</div>
+          <div class="note"><span class="note-icon">🎯</span> Objective: Set emotional buy-in before policy content appears.</div>
+          <div class="note"><span class="note-icon">💡</span> Design note: Show diverse ensemble cast early so learners see themselves in the story.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual">
+        <span class="scene-number">Scene 02</span>
+        <span class="scene-icon">📋</span>
+        <span class="scene-setting">Conference room · Training day</span>
+        <span class="scene-status status-scripted">Scripted</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">What Counts as Harassment?</span>
+          <span class="scene-type">Instruction</span>
+        </div>
+        <p class="scene-desc">Bettina leads a brief onboarding. Three realistic examples appear as short vignettes: a comment about appearance, exclusion from a meeting, and unwanted physical contact. Each is labeled — subtle, moderate, severe.</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Split-screen vignettes using the same office set. Narrator labels each on a clean text overlay.</div>
+          <div class="note"><span class="note-icon">🎯</span> Objective: Learners can distinguish behavior types before the scenario begins.</div>
+          <div class="note"><span class="note-icon">💡</span> Avoid legalese — frame every example as a real conversation, not a policy excerpt.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual" style="background: #fef6e8; border-right-color: #f0d8a8;">
+        <span class="scene-number">Scene 03</span>
+        <span class="scene-icon">😬</span>
+        <span class="scene-setting">Kezia's desk · Thursday afternoon</span>
+        <span class="scene-status status-storyboarded">Storyboarded</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">The Incident</span>
+          <span class="scene-type">⚡ Branching Decision</span>
+        </div>
+        <p class="scene-desc">Blaine leans over Kezia's desk and makes a comment about her appearance in front of Tomás. Tomás looks uncomfortable but says nothing. Kezia feels her face flush. The scene freezes.</p>
+        <p class="scene-desc" style="color: var(--teal); font-weight: 600; font-size: 0.85rem;">Learner chooses what Kezia does next ↓</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Blaine's character expression changes to smug. Kezia's expression shifts to uncomfortable. Soft freeze frame + choice overlay.</div>
+          <div class="note"><span class="note-icon">🎯</span> Objective: Trigger emotional recognition — this is the moment learners must name what they're seeing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual" style="background: #e8f4ec; border-right-color: #b8dfc4;">
+        <span class="scene-number">Scene 04A</span>
+        <span class="scene-icon">✅</span>
+        <span class="scene-setting">HR office · same afternoon</span>
+        <span class="scene-status status-queued">Queued</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">Kezia Reports the Incident</span>
+          <span class="scene-type">Correct Path</span>
+        </div>
+        <p class="scene-desc">Kezia goes directly to HR and describes what happened. Bettina listens, takes notes, and explains the next steps. Tomás later approaches Kezia and thanks her for speaking up.</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Warm office lighting, Bettina nods and types. End with Kezia looking relieved. Positive resolution music.</div>
+          <div class="note"><span class="note-icon">🎯</span> Reinforce: "Speaking up protects you and your colleagues."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual" style="background: #fdf0f0; border-right-color: #e8c0c0;">
+        <span class="scene-number">Scene 04B</span>
+        <span class="scene-icon">⚠️</span>
+        <span class="scene-setting">Break room · next morning</span>
+        <span class="scene-status status-queued">Queued</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">Kezia Stays Silent</span>
+          <span class="scene-type">Consequence Path</span>
+        </div>
+        <p class="scene-desc">Kezia brushes it off. Over the next two scenes, Blaine's behavior escalates — now in front of a client. Kezia overhears Tomás telling another colleague they feel unsafe too. The narrator asks: "What could Kezia have done differently?"</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Slightly cooler color grade, Blaine's character posture grows more dominant across scenes. Subtle tension in music.</div>
+          <div class="note"><span class="note-icon">🎯</span> Show real cost of inaction — not just for Kezia, but for the team. Then redirect to the reporting scene.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual">
+        <span class="scene-number">Scene 05</span>
+        <span class="scene-icon">📜</span>
+        <span class="scene-setting">Policy overlay · narrator VO</span>
+        <span class="scene-status status-queued">Queued</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">Your Reporting Options</span>
+          <span class="scene-type">Policy Anchor</span>
+        </div>
+        <p class="scene-desc">Short animated breakdown of the three reporting paths: direct to manager (if not the harasser), HR portal, or anonymous hotline. Each path animated as a simple flowchart, narrated by Bettina.</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Bettina presents at a whiteboard. Flowchart builds step by step with animated arrows.</div>
+          <div class="note"><span class="note-icon">🎯</span> Objective: Learners can name at least one reporting path and know it's protected.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-card">
+      <div class="scene-visual">
+        <span class="scene-number">Scene 06</span>
+        <span class="scene-icon">🏆</span>
+        <span class="scene-setting">Office · closing scene</span>
+        <span class="scene-status status-queued">Queued</span>
+      </div>
+      <div class="scene-content">
+        <div class="scene-header">
+          <span class="scene-title">Resolution &amp; Knowledge Check</span>
+          <span class="scene-type">Closing + Assessment</span>
+        </div>
+        <p class="scene-desc">Kezia is now 3 months in. The office feels different — Blaine has completed corrective training, Tomás feels safer, and Kezia mentors a newer employee. Five-question knowledge check follows, covering recognition, response, and reporting.</p>
+        <div class="scene-notes">
+          <div class="note"><span class="note-icon">🎬</span> Vyond: Time-lapse effect (calendar pages), warmer color grade, uplifting outro music. Fade to company logo.</div>
+          <div class="note"><span class="note-icon">🎯</span> End on agency, not fear — learners feel equipped, not just warned.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BRANCH DIAGRAM -->
+  <div class="branch-section">
+    <div class="section-label">Branching Logic</div>
+    <div class="storyboard-title">Decision Architecture</div>
+    <div class="branch-diagram">
+      <div class="branch-row">
+        <div class="branch-node decision">
+          <div class="node-title">Scene 3: The Incident</div>
+          <div class="node-sub">Learner decision point</div>
+        </div>
+      </div>
+      <div class="branch-connector">↓</div>
+      <div class="branch-labels">
+        <span class="label-good">Report it →</span>
+        <span class="label-bad">← Stay silent</span>
+      </div>
+      <div class="branch-row">
+        <div class="branch-node">
+          <div class="node-title">Scene 4A</div>
+          <div class="node-sub">HR meeting · positive resolution</div>
+        </div>
+        <div class="branch-node">
+          <div class="node-title">Scene 4B</div>
+          <div class="node-sub">Escalation · consequence shown</div>
+        </div>
+      </div>
+      <div class="branch-connector">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓</div>
+      <div class="branch-row">
+        <div class="branch-node decision">
+          <div class="node-title">Scenes 5 → 6</div>
+          <div class="node-sub">Policy recap · knowledge check · both paths converge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="skills-section">
+    <div class="section-label">Skills Demonstrated</div>
+    <div class="skills-grid">
+      <span class="skill-tag">Vyond animation</span>
+      <span class="skill-tag">Scenario-based design</span>
+      <span class="skill-tag">Branching logic</span>
+      <span class="skill-tag">Adult learning principles</span>
+      <span class="skill-tag">Instructional writing</span>
+      <span class="skill-tag">Character dialogue</span>
+      <span class="skill-tag">Knowledge check design</span>
+      <span class="skill-tag">Compliance content</span>
+      <span class="skill-tag">Storyboarding</span>
+      <span class="skill-tag">Visual storytelling</span>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 Celeste Markey &nbsp;·&nbsp; <a href="#">View Portfolio</a> &nbsp;·&nbsp; <a href="#">LinkedIn</a> &nbsp;·&nbsp; <a href="#">Download Resume</a></p>
+</footer>
+
+</body>
+</html>
